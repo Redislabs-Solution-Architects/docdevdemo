@@ -1,0 +1,15 @@
+{
+  "name": "redis-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "redis-examples.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "See License.txt",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "redis": "^4.1.1"
+  },
+  "type": "module"
+}
