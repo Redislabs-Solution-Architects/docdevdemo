@@ -9,7 +9,7 @@ dotenv.config({ path: '../.env'});
 
 async function connect() {
     const client = createClient({ 
-        'url': `redis://${process.env.REDIS_URL}`
+        'url': process.env.REDIS_URL
     });
     client.on('error', (err) => {
         throw new Error(err)

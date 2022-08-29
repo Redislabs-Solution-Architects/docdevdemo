@@ -9,7 +9,7 @@ from decouple import Config, RepositoryEnv
 def connect():
     config = Config(RepositoryEnv('../.env'))
     url = config.get('REDIS_URL')
-    return redis.from_url(f'redis://{url}')
+    return redis.from_url(url)
 
 def create(client, dataset):
     itemNum = 1
