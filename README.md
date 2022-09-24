@@ -26,7 +26,7 @@ db.inventory.createIndexes([
 ])
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 JSON.SET inventory:1 . '{"item":"journal","qty":25,"tags":["blank","red"],"dim_cm":[14,21],"size":{"h":14,"w":21,"uom":"cm"},"status":"E"}'
@@ -117,7 +117,7 @@ client.ft('inventoryIdx').create_index(schema,definition=index_def)
 db.inventory.find( {} )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx *
@@ -138,7 +138,7 @@ client.ft('inventoryIdx').search(Query('*')).docs
 db.inventory.find( { status: "E" } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '@status:E'
@@ -159,7 +159,7 @@ client.ft('inventoryIdx').search(Query('@status:E')).docs
 db.inventory.find( { $or: [ { "status":"E" }, { "status": "D" } ] } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli:**
 ```bash
 FT.SEARCH inventoryIdx '@status:E|@status:D'
@@ -180,7 +180,7 @@ client.ft('inventoryIdx').search(Query('@status:E|@status:D')).docs
 db.inventory.find( { status: "E", qty: { $lt: 30 } } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli:**
 ```bash
 FT.SEARCH inventoryIdx "(@status:E) (@qty:[-inf (30])"
@@ -205,7 +205,7 @@ db.inventory.find( {
 } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '(@status:E) ((@qty:[-inf (30])|(@item:pa*))'
@@ -226,7 +226,7 @@ client.ft('inventoryIdx').search(Query('(@status:E) ((@qty:[-inf (30])|(@item:pa
 db.inventory.find( { size: { h: 14, w: 21, uom: "cm" } } )
 ```
 
-**Redis Enterprise:**
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '@sizeh:[14 14] @sizew:[21 21] @sizeuom:cm'
@@ -248,7 +248,7 @@ The following example selects all documents where the field uom nested in the si
 db.inventory.find( { "size.uom": "cm" } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '@sizeuom:cm'
@@ -270,7 +270,7 @@ The following query uses the less than operator ($lt) on the field h embedded in
 db.inventory.find( { "size.h": { $lt: 15 } } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '@sizeh:[-inf (15]'
@@ -292,7 +292,7 @@ The following operation queries for all documents where the array dim_cm contain
 db.inventory.find( { dim_cm: { $gt: 25 } } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '(@dim_cm_0:[(25 +inf])|(@dim_cm_1:[(25 +inf])'
@@ -316,7 +316,7 @@ The following example queries for all documents where the second element in the 
 db.inventory.find( { "dim_cm.1": { $gt: 25 } } )
 ```
 
-### Redis Enterprise 
+### Redis 
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '(@dim_cm_1:[(25 +inf])'
@@ -338,7 +338,7 @@ A projection can explicitly include several fields by setting the <field> to 1 i
 db.inventory.find( { status: "E" }, { item: 1, status: 1, _id: 0 } )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 FT.SEARCH inventoryIdx '@status:E' RETURN 2 item status
@@ -369,7 +369,7 @@ db.inventory.update(
 )
 ```
 
-### Redis Enterprise
+### Redis
 **Redis Command:**
 ```bash
 MULTI
@@ -405,7 +405,7 @@ db.inventory.updateOne(
 )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 JSON.ARRAPPEND inventory:2 .tags '"ruled"'
@@ -429,7 +429,7 @@ db.inventory.updateOne(
 )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 JSON.DEL inventory:2 .tags
@@ -460,7 +460,7 @@ db.inventory.replaceOne(
 )
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 JSON.SET inventory:2 . '{"item":"notebook","qty":50,"tags":["red","blank"],"dim_cm":[14,21],"size":{"h":14,"w":21,"uom":"cm"},"status":"E"}'
@@ -495,7 +495,7 @@ client.json().set('inventory:2', '.', {
 db.inventory.deleteOne( { "_id" : 2 } );
 ```
 
-### Redis Enterprise
+### Redis
 **redis-cli**
 ```bash
 JSON.DEL inventory:2
